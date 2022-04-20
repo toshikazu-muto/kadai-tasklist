@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Task;  //追加
+
 class TaskController extends Controller
 {
     /**
@@ -13,7 +15,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        //メッセージ一覧を取得
+        $tasks = Task::all();
+        
+        //メッセージ一覧ビューでそれを表示
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -23,7 +31,11 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $tasks = new Task; 
+        //メッセージ作成ビューを表示
+        return view('tasks,create', [
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -34,7 +46,13 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //メッセージを作成
+        $tasks = new Task;
+        $tasks->content = $request->content;
+        $tasks->save();
+        
+        //トップページへリダイレクトさせる
+        return redirect('/');
     }
 
     /**
@@ -45,7 +63,13 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        //idの値でメッセージを検索して取得
+        $tasks = Task::findOrFail($id);
+        
+        //メッセージ詳細ビューでそれを表示
+        return view('tasks.show', [
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -56,7 +80,13 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        // idの値でメッセージを検索して取得
+        $tasks = tasks::findOrFail($id);
+
+        // メッセージ編集ビューでそれを表示
+        return view('tasks.edit', [
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -68,7 +98,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // idの値でメッセージを検索して取得
+        $tasks = Task::findOrFail($id);
+        // メッセージを更新
+        $tasks->content = $request->content;
+        $tasks->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 
     /**
@@ -79,6 +116,12 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        / idの値でメッセージを検索して取得
+        $tasks = Task::findOrFail($id);
+        // メッセージを削除
+        $tasks->delete();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 }
