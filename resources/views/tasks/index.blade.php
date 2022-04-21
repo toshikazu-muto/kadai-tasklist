@@ -17,14 +17,14 @@
                 <tr>
                     {{-- メッセージ詳細ページへのリンク --}}
                     <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
-                    <td>{{ $tasks->content }}</td>
+                    <td>{{ $task->content }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     @endif
     
-     {{-- メッセージ作成ページへのリンク --}}
+    {{-- メッセージ作成ページへのリンク --}}
     {!! link_to_route('tasks.create', '新規メッセージの投稿', [], ['class' => 'btn btn-primary']) !!}
 
 @endsection
