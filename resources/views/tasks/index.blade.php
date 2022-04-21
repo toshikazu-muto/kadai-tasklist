@@ -13,10 +13,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tasks as $Task)
+                @foreach ($tasks as $task)
                 <tr>
                     {{-- メッセージ詳細ページへのリンク --}}
-                    <td>{!! link_to_route('messages.show', $tasks->id, ['tasks' => $tasks->id]) !!}</td>
+                    <td>{!! link_to_route('tasks.show', $Task->id, ['task' => $task->id]) !!}</td>
                     <td>{{ $tasks->content }}</td>
                 </tr>
                 @endforeach
@@ -24,7 +24,7 @@
         </table>
     @endif
     
-    {{-- メッセージ作成ページへのリンク --}}
+     {{-- メッセージ作成ページへのリンク --}}
     {!! link_to_route('tasks.create', '新規メッセージの投稿', [], ['class' => 'btn btn-primary']) !!}
 
 @endsection
